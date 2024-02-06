@@ -1,9 +1,13 @@
 package entity;
 
+import java.io.*;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Person {
-    int id;
+    static int id;
     String name;
     Date dayOfBirth;
     String zodiac;
@@ -19,4 +23,36 @@ public class Person {
         this.isLikesIriska = isLikesIriska;
     }
 
+    public Person() {
+    }
+
+    public static void saveTo(Person person, File file) throws IOException {
+        try (FileOutputStream stream = new FileOutputStream(file)) {
+            try (PrintWriter writer = new PrintWriter(stream)) {
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                String strDate = formatter.format(person.dayOfBirth);
+                writer.println(person.id);
+                writer.println(person.name);
+                writer.println(strDate);
+                writer.println(person.zodiac);
+                writer.println(person.mainArcan);
+                writer.println(person.isLikesIriska);
+            }
+        }
+    }
+
+    public static Person loadFrom(Person person, File file) throws IOException {
+        try (FileInputStream stream = new FileInputStream(file)) {
+            try (Scanner scanner = new Scanner(stream)) {
+                return new Person(
+                        new Integer(scanner.nextLine()),
+                        scanner.nextLine(),
+                        new Date(scanner.nextLine()),
+                        scanner.nextLine(),
+                        scanner.nextInt(),
+                        scanner.nextBoolean()
+                );
+            }
+        }
+    }
 }
