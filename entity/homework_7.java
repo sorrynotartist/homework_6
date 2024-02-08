@@ -8,23 +8,6 @@ import java.util.Scanner;
 public class homework_7 {
     public static void main(String[] args) throws IOException {
         promptUser();
-
-//        Person person = new Person(
-//                123456789,
-//                "Iriska",
-//                new Date("12/20/2019"),
-//                "Saggitarius",
-//                15,
-//                true
-//        );
-//
-//        File file = new File("output.txt");
-//
-//        Person.saveTo(person, file);
-//
-//        Person catIriska = new Person();
-//
-//        catIriska = Person.loadFrom(catIriska, file);
     }
 
     public static void promptUser() throws IOException {
