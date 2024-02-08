@@ -26,6 +26,19 @@ public class Person {
     public Person() {
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + id + '\'' +
+                "name='" + name + '\'' +
+                ", dayOfBirth=" + dayOfBirth +
+                ", zodiac='" + zodiac + '\'' +
+                ", mainArcan=" + mainArcan +
+                ", isLikesIriska=" + isLikesIriska +
+                '}';
+    }
+
+
     public static void saveTo(Person person, File file) throws IOException {
         try (FileOutputStream stream = new FileOutputStream(file)) {
             try (PrintWriter writer = new PrintWriter(stream)) {
