@@ -7,12 +7,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Person {
-    static int id;
-    String name;
-    Date dayOfBirth;
-    String zodiac;
-    int mainArcan;
-    boolean isLikesIriska;
+    public static int id;
+    public String name;
+    public Date dayOfBirth;
+    public String zodiac;
+    public int mainArcan;
+    public boolean isLikesIriska;
 
     public Person(int id, String name, Date dayOfBirth, String zodiac, int mainArcan, boolean isLikesIriska) {
         this.id = id;
