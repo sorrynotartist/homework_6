@@ -4,8 +4,10 @@ import entity.entity.Person;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DirectoryPersonRepository implements PersonRepository {
+public class DirectoryPersonRepository implements Repository<Person> {
      File dir;
 
     public DirectoryPersonRepository(File dir) throws IOException {
@@ -19,17 +21,25 @@ public class DirectoryPersonRepository implements PersonRepository {
             }
     }
 
-    public void save(Person person) throws IOException {
-        String nameOfFile = Integer.toString(person.id);
+    public void save(Object person) throws IOException {
+        String nameOfFile;
+        nameOfFile = Integer.toString(person.ids);
         File fileId = new File(this.dir, nameOfFile + ".txt");
-        Person.saveTo(person, fileId);
+        Person.saveTo((Person) person, fileId);
     }
 
-    public Person load(int id) throws IOException {
-        File fileId = new File(this.dir, id + ".txt");
-        return Person.loadFrom(new Person(), fileId);
+    @Override
+    public void save(Person abs) throws IOException {
+
     }
 
-
+    public List<Person> load(List<Integer> ids) throws IOException {
+        List<Person> personList = new ArrayList<>();
+        for (int id:ids) {
+            File fileId = new File(this.dir, id + ".txt");
+            personList.add (Person.loadFrom(new Person(), fileId));
+        }
+        return personList;
+    }
 
 }

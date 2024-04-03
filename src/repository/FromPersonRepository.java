@@ -4,9 +4,10 @@ import entity.entity.Person;
 
 import java.io.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
-public class FromPersonRepository implements PersonRepository {
+public class FromPersonRepository implements Repository<Integer> {
 
     public static void main(String[] args) throws IOException {
         System.out.println("do you want to load or enter your data?");
@@ -17,13 +18,13 @@ public class FromPersonRepository implements PersonRepository {
             case "load":
                 System.out.println("enter your id: ");
                 int id = Integer.parseInt(in.nextLine());
-                System.out.println(dir.load(id));
+                List<Integer> ids = null;
+                System.out.println(dir.load((List<Integer>) null));
                 break;
             case "enter":
                 Person person = createNewPerson();
                 dir.save(person);
         }
-        in.close();
     }
 
     private static Person createNewPerson() {
@@ -50,14 +51,19 @@ public class FromPersonRepository implements PersonRepository {
         return new Person(id, name,  birthday, zodiac, arcan, like);
     }
 
-    public static void save(Person person) throws IOException {
-        String nameOfFile = Integer.toString(person.id);
+    public void save(T person) throws IOException {
+        String nameOfFile = Integer.toString(person.ids);
         File fileId = new File("src/repository/" + nameOfFile + ".txt");
-        Person.saveTo(person, fileId);
+        Person.saveTo((Person) person, fileId);
     }
 
-    public static Person load(int id) throws IOException {
-        File fileId = new File("src/repository/" + id + ".txt");
-        return Person.loadFrom(new Person(), fileId);
+    @Override
+    public void save(Integer abs) throws IOException {
+
+    }
+
+    public List<Integer> load(List<Integer> ids) throws IOException {
+        File fileId = new File("src/repository/" + ids + ".txt");
+        return ids;
     }
 }
